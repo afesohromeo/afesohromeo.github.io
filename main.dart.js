@@ -60578,7 +60578,11 @@ A.aaC.prototype={
 $3(a,b,c){var s,r=null
 if(b.a){A.b7("Dark mode")
 s=A.a5r(A.aiH(r,B.O.i(0,900),r,r,r,r,B.i,r,r,r,r,r,r,r,r,r),B.av,B.W,r,B.zZ,$.em())}else s=A.awF()
+<<<<<<< HEAD
 return new A.mB(c," Amazing-Puzzle",s,B.DK,!1,r)},
+=======
+return new A.mB(c," Challenge",s,B.DK,!1,r)},
+>>>>>>> a7d2a4acff7a4b5936738a38ac191c8372460ec0
 $C:"$3",
 $R:3,
 $S:382}
