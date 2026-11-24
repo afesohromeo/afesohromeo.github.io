@@ -1,0 +1,57 @@
+# Builds the site on every pull request; publishes it to GitHub Pages on
+# every push to main (doc/01-site-plan.md, D-6).
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 3.13.4
+
+      - name: Install packages
+        run: dart pub get
+
+      - name: Analyze
+        run: dart analyze --fatal-infos
+
+      - name: Test
+        run: dart test
+
+      - name: Build
+        run: |
+          dart pub global activate jaspr_cli 0.23.5
+          jaspr build
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/jaspr
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
