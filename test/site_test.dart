@@ -1,15 +1,16 @@
 @TestOn('vm')
 library;
 
-import 'package:jaspr/server.dart' as jaspr;
+import 'dart:io';
+
 import 'package:jaspr_test/server_test.dart';
-import 'package:portfolio/app.dart';
 import 'package:portfolio/l10n/strings.dart';
+import 'package:portfolio/site_document.dart';
 
 // Plan: doc/01-site-plan.md, step 1 and D-2 (English at /, French at /fr/).
 
 Future<DocumentResponse> _get(ServerTester tester, String path) {
-  tester.pumpComponent(const jaspr.Document(body: App()));
+  tester.pumpComponent(siteDocument());
   return tester.request(path);
 }
 
@@ -45,6 +46,16 @@ void main() {
         expect(alternate('en'), 'https://afesohromeo.github.io/');
         expect(alternate('fr'), 'https://afesohromeo.github.io/fr/');
         expect(alternate('x-default'), 'https://afesohromeo.github.io/');
+      });
+
+      testServer('then its browser-tab and home-screen icons are the logo files in web/', (tester) async {
+        final response = await _get(tester, path);
+        final doc = response.document!;
+
+        for (final (rel, file) in [('icon', '/favicon.ico'), ('apple-touch-icon', '/apple-touch-icon.png')]) {
+          expect(doc.querySelector('link[rel="$rel"]')?.attributes['href'], file);
+          expect(File('web$file').existsSync(), isTrue, reason: '$file is linked but missing from web/');
+        }
       });
 
       testServer('then the language switch goes to the other language', (tester) async {
