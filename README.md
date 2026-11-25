@@ -23,6 +23,16 @@ jaspr build            # writes the site to build/jaspr
 
 `jaspr build` starts a temporary server on port 8080 to render the pages. If that port is taken, pass another one: `jaspr build --port 8099`.
 
+## Troubleshooting
+
+**`Failed to create server socket ... port = 8099` (or 8080, 8181).** A server from an earlier `jaspr serve` or `jaspr build` is still running. On Windows, stopping the CLI with Ctrl+C can leave its server behind: the server keeps the site's port, and its debugger service keeps port 8181. Stop whatever is listening on those ports, then start again:
+
+```powershell
+Get-NetTCPConnection -LocalPort 8099,8181 -State Listen | ForEach-Object { Stop-Process -Id $_.OwningProcess }
+```
+
+Check first that nothing else you need is using port 8181. It is also the default debugger port for other Dart programs, such as `flutter run`.
+
 ## Publishing
 
 Every push to `main` is built, tested and published to GitHub Pages by [the workflow](.github/workflows/deploy.yml). Pull requests are built and tested but not published.
