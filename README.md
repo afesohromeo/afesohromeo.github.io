@@ -1,16 +1,38 @@
-# portfolio
+# afesohromeo.github.io
 
-A new Flutter project.
+Source of [afesohromeo.github.io](https://afesohromeo.github.io), the portfolio of Afesoh Romeo, Flutter developer.
 
-## Getting Started
+Built with [Jaspr](https://jaspr.site), a Dart web framework, in static mode: each page is pre-rendered to plain HTML, and only the interactive parts run code in the browser. English at `/`, French at `/fr/`.
 
-This project is a starting point for a Flutter application.
+The plan and its decisions: [doc/01-site-plan.md](doc/01-site-plan.md).
 
-A few resources to get you started if this is your first Flutter project:
+## Run it
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```shell
+dart pub global activate jaspr_cli 0.23.5
+jaspr serve
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Check and build
+
+```shell
+dart analyze
+dart test
+jaspr build            # writes the site to build/jaspr
+```
+
+`jaspr build` starts a temporary server on port 8080 to render the pages. If that port is taken, pass another one: `jaspr build --port 8099`.
+
+## Publishing
+
+Every push to `main` is built, tested and published to GitHub Pages by [the workflow](.github/workflows/deploy.yml). Pull requests are built and tested but not published.
+
+## Where things are
+
+| Path | What |
+|------|------|
+| `lib/l10n/` | All text: `strings.dart` (the list), `en.dart`, `fr.dart` |
+| `lib/pages/home_page.dart` | The page: `<head>` and the sections in order |
+| `lib/components/` | One file per section |
+| `lib/styles/theme.dart` | Colours, fonts, global styles |
+| `web/` | Files served as-is: images, favicon, sitemap |

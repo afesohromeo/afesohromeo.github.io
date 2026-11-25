@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://afesohromeo.github.io/sitemap.xml
