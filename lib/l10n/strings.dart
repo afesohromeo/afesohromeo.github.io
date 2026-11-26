@@ -50,6 +50,13 @@ abstract class Strings {
   String get resultLabel;
   String get liveLinkLabel;
 
+  // The slideshow.
+  String get pauseLabel;
+  String get playLabel;
+
+  /// Read by screen readers for a slide's dot, such as "Slide 2 of 4".
+  String slideLabel(int number, int total);
+
   /// The alt text of a screenshot, such as "Plotwatch on a phone".
   String screenAlt(String projectName, Screen screen);
 

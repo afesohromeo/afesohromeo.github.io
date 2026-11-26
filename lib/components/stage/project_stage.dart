@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
+import 'package:universal_web/web.dart' as web;
 
 import '../../content/project.dart';
 import '../../content/projects.dart';
@@ -44,10 +47,67 @@ class ProjectStage extends StatefulComponent {
 }
 
 class _ProjectStageState extends State<ProjectStage> {
-  /// The only state on the stage (D-12): which project is shown.
-  var _selected = projects.first.id;
+  /// How long each slide stays on screen while the slideshow plays.
+  static const _slideTime = Duration(seconds: 5);
 
-  void _select(ProjectId id) => setState(() => _selected = id);
+  // The stage's state (D-12): which project and slide are shown, and whether
+  // the slideshow moves by itself.
+  var _selected = projects.first.id;
+  var _slide = 0;
+  late bool _playing;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Visitors who ask their device for less motion get a still slideshow.
+    _playing = !_prefersReducedMotion();
+    _restartTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  /// Starts the clock again from zero, so each slide gets its full time.
+  ///
+  /// It runs only in the browser (`kIsWeb`). During the build this component
+  /// is rendered once, and a running timer would never let the build finish.
+  void _restartTimer() {
+    _timer?.cancel();
+    _timer = kIsWeb && _playing ? Timer.periodic(_slideTime, (_) => _nextSlide()) : null;
+  }
+
+  void _nextSlide() {
+    setState(() => _slide = (_slide + 1) % projectById(_selected).slides.length);
+  }
+
+  void _select(ProjectId id) {
+    setState(() {
+      _selected = id;
+      _slide = 0;
+    });
+    _restartTimer();
+  }
+
+  void _showSlide(int slide) {
+    setState(() {
+      _slide = slide;
+      _playing = false;
+    });
+    _restartTimer();
+  }
+
+  void _togglePlaying() {
+    setState(() => _playing = !_playing);
+    _restartTimer();
+  }
+
+  static bool _prefersReducedMotion() {
+    return kIsWeb && web.window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
 
   @override
   Component build(BuildContext context) {
@@ -61,9 +121,22 @@ class _ProjectStageState extends State<ProjectStage> {
         ProjectButtons(strings: strings, selected: _selected, onSelect: _select),
         // Every project is rendered, and the others are hidden: their text is in
         // the HTML for search engines, and switching needs no loading.
-        for (final project in projects)
-          ProjectPanel(project: project, strings: strings, shown: project.id == _selected),
+        for (final project in projects) _panel(project, strings),
       ],
+    );
+  }
+
+  /// The selected project gets the live slideshow; hidden ones rest on slide 1.
+  Component _panel(Project project, Strings strings) {
+    final shown = project.id == _selected;
+    return ProjectPanel(
+      project: project,
+      strings: strings,
+      shown: shown,
+      slide: shown ? _slide : 0,
+      playing: shown && _playing,
+      onShowSlide: _showSlide,
+      onTogglePlaying: _togglePlaying,
     );
   }
 }

@@ -12,6 +12,8 @@ import 'package:portfolio/components/stage/project_panel.dart'
     as _project_panel;
 import 'package:portfolio/components/stage/project_stage.dart'
     as _project_stage;
+import 'package:portfolio/components/stage/slide_controls.dart'
+    as _slide_controls;
 import 'package:portfolio/components/hero.dart' as _hero;
 import 'package:portfolio/components/site_header.dart' as _site_header;
 import 'package:portfolio/styles/theme.dart' as _theme;
@@ -48,6 +50,7 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._project_buttons.ProjectButtons.styles,
     ..._project_panel.ProjectPanel.styles,
     ..._project_stage.ProjectStage.styles,
+    ..._slide_controls.SlideControls.styles,
   ],
 );
 

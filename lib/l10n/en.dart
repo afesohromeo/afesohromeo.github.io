@@ -42,6 +42,12 @@ class EnglishStrings extends Strings {
   @override
   String get liveLinkLabel => 'Open the live app';
   @override
+  String get pauseLabel => 'Pause the slideshow';
+  @override
+  String get playLabel => 'Play the slideshow';
+  @override
+  String slideLabel(int number, int total) => 'Slide $number of $total';
+  @override
   String screenAlt(String projectName, Screen screen) => switch (screen) {
     Screen.web => '$projectName on the web',
     Screen.phone => '$projectName on a phone',

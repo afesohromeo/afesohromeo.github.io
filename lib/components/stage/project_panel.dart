@@ -5,16 +5,32 @@ import '../../content/project.dart';
 import '../../l10n/strings.dart';
 import '../../styles/theme.dart';
 import 'device_frame.dart';
+import 'slide_controls.dart';
 
 /// One project: problem, what was built, result, its link, and its device.
 class ProjectPanel extends StatelessComponent {
-  const ProjectPanel({required this.project, required this.strings, required this.shown, super.key});
+  const ProjectPanel({
+    required this.project,
+    required this.strings,
+    required this.shown,
+    required this.slide,
+    required this.playing,
+    required this.onShowSlide,
+    required this.onTogglePlaying,
+    super.key,
+  });
 
   final Project project;
   final Strings strings;
 
   /// Hidden panels stay in the HTML with the `hidden` attribute.
   final bool shown;
+
+  // The slideshow, controlled by the stage (see SlideControls).
+  final int slide;
+  final bool playing;
+  final void Function(int slide) onShowSlide;
+  final void Function() onTogglePlaying;
 
   @override
   Component build(BuildContext context) {
@@ -43,7 +59,17 @@ class ProjectPanel extends StatelessComponent {
               [.text('${strings.liveLinkLabel} ↗')],
             ),
         ]),
-        DeviceFrame(project: project, strings: strings, slide: 0, eager: shown),
+        div([
+          DeviceFrame(project: project, strings: strings, slide: slide, eager: shown),
+          SlideControls(
+            strings: strings,
+            count: project.slides.length,
+            current: slide,
+            playing: playing,
+            onShowSlide: onShowSlide,
+            onTogglePlaying: onTogglePlaying,
+          ),
+        ]),
       ],
     );
   }

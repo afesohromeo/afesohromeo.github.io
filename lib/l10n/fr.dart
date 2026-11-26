@@ -43,6 +43,12 @@ class FrenchStrings extends Strings {
   @override
   String get liveLinkLabel => "Ouvrir l'application";
   @override
+  String get pauseLabel => 'Mettre le diaporama en pause';
+  @override
+  String get playLabel => 'Relancer le diaporama';
+  @override
+  String slideLabel(int number, int total) => 'Image $number sur $total';
+  @override
   String screenAlt(String projectName, Screen screen) => switch (screen) {
     Screen.web => '$projectName sur le web',
     Screen.phone => '$projectName sur un téléphone',

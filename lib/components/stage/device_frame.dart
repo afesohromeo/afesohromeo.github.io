@@ -20,33 +20,46 @@ class DeviceFrame extends StatelessComponent {
 
   final Project project;
   final Strings strings;
+
+  /// The slide on show. Every slide is rendered, stacked in the same place;
+  /// only the current one is visible.
   final int slide;
 
-  /// Whether the images load with the page. Hidden projects load theirs only
-  /// when they are shown (`loading="lazy"`).
+  /// Whether the first slide's images load with the page. The other slides,
+  /// and every slide of a hidden project, load later (`loading="lazy"`).
   final bool eager;
 
   @override
   Component build(BuildContext context) {
     return figure(classes: 'device device-${project.layout.name}', [
-      div(classes: 'screens', [
-        for (final screen in project.screens)
-          switch (screen) {
-            Screen.web => _browser(_screenshot(screen, width: 1280, height: 720)),
-            Screen.phone => _phone(_screenshot(screen, width: 540, height: 1140)),
-          },
+      div(classes: 'slides', [
+        for (var index = 0; index < project.slides.length; index++)
+          div(
+            classes: index == slide ? 'slide current' : 'slide',
+            // Screen readers read only the slide on show.
+            attributes: {if (index != slide) 'aria-hidden': 'true'},
+            [
+              div(classes: 'screens', [
+                for (final screen in project.screens)
+                  switch (screen) {
+                    Screen.web => _browser(_screenshot(index, screen, width: 1280, height: 720)),
+                    Screen.phone => _phone(_screenshot(index, screen, width: 540, height: 1140)),
+                  },
+              ]),
+            ],
+          ),
       ]),
       figcaption([.text(strings.project(project.id).slideCaptions[slide])]),
     ]);
   }
 
-  Component _screenshot(Screen screen, {required int width, required int height}) {
+  Component _screenshot(int index, Screen screen, {required int width, required int height}) {
     return img(
-      src: project.screenshot(languageCode: strings.languageCode, slide: slide, screen: screen),
+      src: project.screenshot(languageCode: strings.languageCode, slide: index, screen: screen),
       alt: strings.screenAlt(project.name, screen),
       width: width,
       height: height,
-      loading: eager ? null : .lazy,
+      loading: eager && index == 0 ? null : .lazy,
     );
   }
 
@@ -85,6 +98,21 @@ class DeviceFrame extends StatelessComponent {
         fontSize: 14.px,
       ),
       css('.screens').styles(position: .relative()),
+    ]),
+
+    // The slides share one grid cell, so they sit on top of each other and
+    // the frame keeps its size. Changing slide fades between them.
+    css('.slides').styles(display: .grid),
+    css('.slide', [
+      css('&').styles(
+        opacity: 0,
+        transition: Transition('opacity', duration: const Duration(milliseconds: 600)),
+        raw: {'grid-area': '1 / 1'},
+      ),
+      css('&.current').styles(opacity: 1),
+    ]),
+    css.media(MediaQuery.raw('(prefers-reduced-motion: reduce)'), [
+      css('.slide').styles(transition: Transition.unset),
     ]),
 
     // The phone: a dark rim with round corners, the shape of a 1080x2280 screen.
