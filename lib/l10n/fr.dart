@@ -75,7 +75,7 @@ class FrenchStrings extends Strings {
       ],
     ),
     ProjectId.pluslocate => const ProjectText(
-      kind: 'Android',
+      kind: 'Application mobile',
       problem: "Beaucoup de lieux au Cameroun n'ont pas d'adresse à partager.",
       built:
           "Une application Flutter qui trouve, enregistre et partage n'importe "

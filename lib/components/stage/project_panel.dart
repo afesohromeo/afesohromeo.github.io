@@ -79,7 +79,7 @@ class ProjectPanel extends StatelessComponent {
     css('.project-panel', [
       css('&').styles(
         display: .grid,
-        alignItems: .center,
+        alignItems: .start,
         gap: .all(40.px),
         raw: {'grid-template-columns': 'minmax(0, 1fr)'},
       ),

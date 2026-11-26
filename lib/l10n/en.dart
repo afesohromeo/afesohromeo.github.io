@@ -70,7 +70,7 @@ class EnglishStrings extends Strings {
       ],
     ),
     ProjectId.pluslocate => const ProjectText(
-      kind: 'Android',
+      kind: 'Mobile app',
       problem: 'Many places in Cameroon have no street address to share.',
       built: 'A Flutter app that finds, saves and shares any location as a Plus Code, in English and French.',
       result: 'Coming soon to Google Play.',
