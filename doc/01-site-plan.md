@@ -30,6 +30,9 @@ Left out on purpose: experience pages, a contact page, long text.
 | D-8 | **Look: dark ground, the logo's gold as the accent**; Space Grotesk headings, Inter body, JetBrains Mono for code | Approved in the design mockup (2026-11-24). The headline is kept as is for now and revisited in step 5. |
 | D-9 | **Logo: the existing render, shown as a rounded badge** | The original Blender file may be lost. A render with a transparent background can replace the badge later. |
 | D-10 | **Screenshots as a slideshow, not video** | Sharper and lighter, easy to update, and easy to swap for French versions. |
+| D-11 | **Plotwatch is shown as a browser window with a phone over its corner**; each slide is one moment seen from both sides (the worker's phone, the owner's browser) | Plotwatch is used on both: photos are taken on the phone, stages are approved on the web. One picture tells that story. Chosen by the developer on 2026-11-25. |
+| D-12 | **State is local (`StatefulComponent` + `setState`); content is const Dart models; no BLoC, no repositories** | The only state is what the visitor picked (project, slide). Nothing is loaded or saved. If the site ever needs remote data, fetch it at build time first, and add the app layers (model, repository, BLoC) only then. |
+| D-13 | **Project text lives in `Strings` (D-3); everything else about a project (name, layout, slides, link) in `lib/content/projects.dart`.** Screenshot paths follow one naming rule | One place per kind of change: wording in `l10n/`, projects in `content/`. The naming rule lets a test check that every screenshot exists in both languages. |
 
 ## 3. Steps
 
@@ -55,8 +58,8 @@ Each step: tests first for the interactive parts, then the code, then `dart anal
 | Item | Status |
 |------|--------|
 | Logo | Received: the WhatsApp render (`web/images/logo.jpg`) |
-| PlusLocate: 3–4 phone screenshots (French too if possible) | Waiting |
-| Plotwatch: 3–4 screenshots of the live web app, about 1280 px wide | Waiting |
+| PlusLocate: 4 phone screenshots, English and French (welcome, map, search with a result, saved) | In progress |
+| Plotwatch: 3–4 slides, each a phone screen and a web screen (1280 × 800) of the same moment, English and French (capture, verify, money, overview) | In progress |
 | CV, English PDF | Waiting (after the developer's edits) |
 | LinkedIn link | Waiting |
 | The email address the site shows | Waiting |

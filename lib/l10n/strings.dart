@@ -1,5 +1,9 @@
+import '../content/project.dart';
 import 'en.dart';
 import 'fr.dart';
+import 'project_text.dart';
+
+export 'project_text.dart';
 
 /// Every piece of text on the site (doc/01-site-plan.md, D-3).
 ///
@@ -30,4 +34,7 @@ abstract class Strings {
   String get headlineStart;
   String get headlineEnd;
   String get intro;
+
+  /// The words about each project on the stage (D-13).
+  ProjectText project(ProjectId id);
 }
