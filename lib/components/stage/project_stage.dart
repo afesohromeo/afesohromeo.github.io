@@ -44,10 +44,10 @@ class ProjectStage extends StatefulComponent {
       css('h2').styles(
         margin: .zero,
         color: mutedColor,
-        textTransform: .upperCase,
         fontFamily: monoFont,
         fontSize: 12.px,
         fontWeight: .w400,
+        textTransform: .upperCase,
         letterSpacing: 0.12.em,
       ),
     ]),
