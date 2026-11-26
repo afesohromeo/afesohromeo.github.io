@@ -117,8 +117,8 @@ class DeviceFrame extends StatelessComponent {
 
     // The phone: a dark rim with round corners, the shape of a 1080x2280 screen.
     css('.phone').styles(
-      border: .all(color: const Color('#05070A'), width: 8.px),
-      radius: .circular(30.px),
+      border: .all(color: const Color('#05070A'), width: 10.px),
+      radius: .circular(44.px),
       overflow: .hidden,
       raw: {'box-shadow': '0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px #323741'},
     ),
@@ -178,5 +178,12 @@ class DeviceFrame extends StatelessComponent {
       border: .all(color: const Color('#05070A'), width: 5.px),
       radius: .circular(20.px),
     ),
+
+    // Beside the text (wide screens), the device column takes the device's
+    // own width: 560px for a browser and phone, 300px for a phone alone.
+    css.media(MediaQuery.screen(minWidth: 1040.px), [
+      css('.device-browserAndPhone').styles(width: 560.px),
+      css('.device-phone').styles(width: 300.px),
+    ]),
   ];
 }

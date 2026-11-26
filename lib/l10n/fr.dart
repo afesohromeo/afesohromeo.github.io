@@ -9,7 +9,7 @@ class FrenchStrings extends Strings {
   @override
   String get homePath => '/fr/';
   @override
-  String get otherLanguageName => 'English';
+  String get languageName => 'Français';
 
   @override
   String get pageTitle => 'Afesoh Romeo, développeur Flutter';
@@ -31,7 +31,7 @@ class FrenchStrings extends Strings {
       'assisté par IA.';
 
   @override
-  String get stageHeading => "Ce que j'ai réalisé";
+  String get stageHeading => 'Projets choisis';
   @override
   String get projectChoiceLabel => 'Choisir un projet';
   @override

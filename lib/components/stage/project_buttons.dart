@@ -46,35 +46,32 @@ class ProjectButtons extends StatelessComponent {
 
   @css
   static List<StyleRule> get styles => [
-    css('.project-buttons').styles(
-      display: .flex,
-      margin: .only(bottom: 28.px),
-      flexWrap: .wrap,
-      gap: .all(12.px),
-    ),
+    css('.project-buttons').styles(display: .flex, flexWrap: .wrap, gap: .all(10.px)),
+    // Pills, as in the mockup: the selected one is filled with the accent.
     css('.project-button', [
       css('&').styles(
-        display: .flex,
-        minHeight: 44.px,
-        padding: .symmetric(horizontal: 18.px, vertical: 10.px),
+        display: .inlineFlex,
+        minHeight: 48.px,
+        padding: .symmetric(horizontal: 18.px),
         border: .all(color: strongLineColor, width: 1.px),
-        radius: .circular(14.px),
+        radius: .circular(999.px),
         cursor: .pointer,
-        flexDirection: .column,
-        alignItems: .start,
+        alignItems: .center,
+        gap: .all(10.px),
         color: textColor,
         fontFamily: bodyFont,
-        backgroundColor: groundColor,
+        backgroundColor: Colors.transparent,
       ),
       css('&:hover').styles(
         border: .all(color: accentColor, width: 1.px),
       ),
       css('&[aria-pressed="true"]').styles(
         border: .all(color: accentColor, width: 1.px),
-        backgroundColor: const Color('#1A1812'),
+        color: groundColor,
+        backgroundColor: accentColor,
       ),
       css('.name').styles(fontFamily: headingFont, fontSize: 17.px, fontWeight: .w700),
-      css('.kind').styles(color: mutedColor, fontFamily: monoFont, fontSize: 12.px),
+      css('.kind').styles(opacity: 0.8, fontSize: 13.px),
     ]),
   ];
 }

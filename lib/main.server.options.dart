@@ -15,6 +15,7 @@ import 'package:portfolio/components/stage/project_stage.dart'
 import 'package:portfolio/components/stage/slide_controls.dart'
     as _slide_controls;
 import 'package:portfolio/components/hero.dart' as _hero;
+import 'package:portfolio/components/intro.dart' as _intro;
 import 'package:portfolio/components/site_header.dart' as _site_header;
 import 'package:portfolio/styles/theme.dart' as _theme;
 
@@ -45,6 +46,7 @@ ServerOptions get defaultServerOptions => ServerOptions(
   styles: () => [
     ..._theme.globalStyles,
     ..._hero.Hero.styles,
+    ..._intro.Intro.styles,
     ..._site_header.SiteHeader.styles,
     ..._device_frame.DeviceFrame.styles,
     ..._project_buttons.ProjectButtons.styles,

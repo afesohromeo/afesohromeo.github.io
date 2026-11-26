@@ -9,7 +9,7 @@ class EnglishStrings extends Strings {
   @override
   String get homePath => '/';
   @override
-  String get otherLanguageName => 'Français';
+  String get languageName => 'English';
 
   @override
   String get pageTitle => 'Afesoh Romeo, Flutter developer';
@@ -30,7 +30,7 @@ class EnglishStrings extends Strings {
       'open-source tooling for AI-assisted Flutter development.';
 
   @override
-  String get stageHeading => "What I've built";
+  String get stageHeading => 'Selected work';
   @override
   String get projectChoiceLabel => 'Choose a project';
   @override

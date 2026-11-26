@@ -59,7 +59,7 @@ class ProjectPanel extends StatelessComponent {
               [.text('${strings.liveLinkLabel} ↗')],
             ),
         ]),
-        div([
+        div(classes: 'project-device', [
           DeviceFrame(project: project, strings: strings, slide: slide, eager: shown),
           SlideControls(
             strings: strings,
@@ -76,24 +76,26 @@ class ProjectPanel extends StatelessComponent {
 
   @css
   static List<StyleRule> get styles => [
+    // Like the stage, the panel draws no box: its text goes to the Intro grid's
+    // "facts" area and its device to the "device" area. A hidden panel's parts
+    // are not displayed at all.
     css('.project-panel', [
-      css('&').styles(
-        display: .grid,
-        alignItems: .start,
-        gap: .all(40.px),
-        raw: {'grid-template-columns': 'minmax(0, 1fr)'},
-      ),
+      css('&').styles(display: .contents),
       css('&[hidden]').styles(display: .none),
     ]),
-    css.media(MediaQuery.screen(minWidth: 900.px), [
-      css('.project-panel').styles(raw: {'grid-template-columns': 'minmax(0, 5fr) minmax(0, 7fr)'}),
-    ]),
     css('.project-text', [
+      css('&').styles(
+        display: .flex,
+        flexDirection: .column,
+        alignItems: .start,
+        gap: .all(16.px),
+        raw: {'grid-area': 'facts'},
+      ),
       css('dl').styles(
         display: .grid,
+        maxWidth: 600.px,
         margin: .zero,
-        gap: .all(8.px),
-        raw: {'grid-template-columns': 'max-content 1fr', 'column-gap': '20px'},
+        raw: {'grid-template-columns': '96px minmax(0, 1fr)', 'column-gap': '16px', 'row-gap': '12px'},
       ),
       css('dt').styles(
         padding: .only(top: 3.px),
@@ -101,11 +103,12 @@ class ProjectPanel extends StatelessComponent {
         fontFamily: monoFont,
         fontSize: 12.px,
       ),
-      css('dd').styles(margin: .zero, color: softTextColor, lineHeight: 1.6.em),
+      css('dd').styles(margin: .zero, color: const Color('#DDE1E6')),
       css('.live-link', [
         css('&').styles(
-          display: .inlineBlock,
-          margin: .only(top: 20.px),
+          display: .inlineFlex,
+          minHeight: 44.px,
+          alignItems: .center,
           color: accentColor,
           fontWeight: .w600,
           textDecoration: TextDecoration(line: .none),
@@ -113,5 +116,6 @@ class ProjectPanel extends StatelessComponent {
         css('&:hover').styles(textDecoration: TextDecoration(line: .underline)),
       ]),
     ]),
+    css('.project-device').styles(alignSelf: .center, raw: {'grid-area': 'device'}),
   ];
 }

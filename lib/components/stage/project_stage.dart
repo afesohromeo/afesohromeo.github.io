@@ -29,18 +29,26 @@ class ProjectStage extends StatefulComponent {
 
   @css
   static List<StyleRule> get styles => [
-    css('.stage', [
+    // The stage draws no box of its own: its parts are placed in the Intro's
+    // grid (see Intro).
+    css('.stage').styles(display: .contents),
+    css('.stage-picker', [
       css('&').styles(
-        maxWidth: contentWidth,
-        padding: .symmetric(horizontal: 24.px, vertical: 48.px),
-        margin: .symmetric(horizontal: .auto),
+        display: .flex,
+        flexDirection: .column,
+        gap: .all(16.px),
+        raw: {'grid-area': 'picker'},
       ),
+      // "Selected work": a small label, as in the mockup, but still a heading
+      // for screen readers.
       css('h2').styles(
-        margin: .only(bottom: 20.px),
-        color: textColor,
-        fontFamily: headingFont,
-        fontSize: 28.px,
-        fontWeight: .w700,
+        margin: .zero,
+        color: mutedColor,
+        textTransform: .upperCase,
+        fontFamily: monoFont,
+        fontSize: 12.px,
+        fontWeight: .w400,
+        letterSpacing: 0.12.em,
       ),
     ]),
   ];
@@ -113,12 +121,13 @@ class _ProjectStageState extends State<ProjectStage> {
   Component build(BuildContext context) {
     final strings = Strings.of(component.languageCode);
 
-    return section(
+    return div(
       classes: 'stage',
-      attributes: {'aria-labelledby': 'stage-heading'},
       [
-        h2(id: 'stage-heading', [.text(strings.stageHeading)]),
-        ProjectButtons(strings: strings, selected: _selected, onSelect: _select),
+        div(classes: 'stage-picker', [
+          h2(id: 'stage-heading', [.text(strings.stageHeading)]),
+          ProjectButtons(strings: strings, selected: _selected, onSelect: _select),
+        ]),
         // Every project is rendered, and the others are hidden: their text is in
         // the HTML for search engines, and switching needs no loading.
         for (final project in projects) _panel(project, strings),

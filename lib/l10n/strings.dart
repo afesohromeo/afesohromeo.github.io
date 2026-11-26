@@ -28,8 +28,8 @@ abstract class Strings {
   /// Where this language's page lives (D-2).
   String get homePath;
 
-  /// The name of the *other* language, shown on the switch in that language.
-  String get otherLanguageName;
+  /// This language's name, in itself: read by screen readers on the EN | FR switch.
+  String get languageName;
 
   String get pageTitle;
   String get pageDescription;
