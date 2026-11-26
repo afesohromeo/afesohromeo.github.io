@@ -60,7 +60,7 @@ Each step: tests first for the interactive parts, then the code, then `dart anal
 | Logo | Received: the WhatsApp render (`web/images/logo.jpg`) |
 | PlusLocate: 4 phone screenshots, English and French (welcome, map, search with a result, saved) | Received (2026-11-26) |
 | Plotwatch: 3–4 slides, each a phone screen and a web screen (1280 × 800) of the same moment, English and French (capture, verify, money, overview) | Received (2026-11-26) |
-| CV, English PDF | Waiting (after the developer's edits) |
-| LinkedIn link | Waiting |
-| The email address the site shows | Waiting |
-| Google Play links for SENNACARE, Aurore ERP, Data Central | Taken from the CV |
+| CV, English PDF | Received 2026-11-27; served as `web/cv/Afesoh_Romeo_CV.pdf` |
+| LinkedIn link | Received: https://www.linkedin.com/in/romeo-afesoh/ |
+| The email address the site shows | Received; in `lib/components/email_buttons.dart` only, never in the HTML (D-5) |
+| Google Play links for SENNACARE, Aurore ERP, Data Central | From the CV: `com.komcorp.sennacare`, `com.advanceItGroup.auroreErp`, `com.advanceItGroup.dataCentral` |

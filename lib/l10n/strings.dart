@@ -39,6 +39,12 @@ abstract class Strings {
   String get headlineEnd;
   String get intro;
 
+  // The contact row in the opening.
+  String get emailMeLabel;
+  String get copyEmailLabel;
+  String get emailCopiedLabel;
+  String get cvLabel;
+
   // The stage (step 2).
   String get stageHeading;
 

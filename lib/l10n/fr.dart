@@ -31,6 +31,15 @@ class FrenchStrings extends Strings {
       'assisté par IA.';
 
   @override
+  String get emailMeLabel => "M'écrire";
+  @override
+  String get copyEmailLabel => "Copier l'adresse";
+  @override
+  String get emailCopiedLabel => 'Adresse copiée';
+  @override
+  String get cvLabel => 'CV (PDF, en anglais)';
+
+  @override
   String get stageHeading => 'Projets choisis';
   @override
   String get projectChoiceLabel => 'Choisir un projet';

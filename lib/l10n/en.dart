@@ -30,6 +30,15 @@ class EnglishStrings extends Strings {
       'open-source tooling for AI-assisted Flutter development.';
 
   @override
+  String get emailMeLabel => 'Email me';
+  @override
+  String get copyEmailLabel => 'Copy address';
+  @override
+  String get emailCopiedLabel => 'Address copied';
+  @override
+  String get cvLabel => 'CV (PDF, English)';
+
+  @override
   String get stageHeading => 'Selected work';
   @override
   String get projectChoiceLabel => 'Choose a project';
