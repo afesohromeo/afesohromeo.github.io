@@ -77,6 +77,5 @@ void main() {
         }
       }
     },
-    skip: 'The screenshots are being captured (doc/01-site-plan.md, §5). Remove this skip when they are added.',
   );
 }

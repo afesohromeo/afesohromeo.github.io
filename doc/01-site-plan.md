@@ -58,8 +58,8 @@ Each step: tests first for the interactive parts, then the code, then `dart anal
 | Item | Status |
 |------|--------|
 | Logo | Received: the WhatsApp render (`web/images/logo.jpg`) |
-| PlusLocate: 4 phone screenshots, English and French (welcome, map, search with a result, saved) | In progress |
-| Plotwatch: 3–4 slides, each a phone screen and a web screen (1280 × 800) of the same moment, English and French (capture, verify, money, overview) | In progress |
+| PlusLocate: 4 phone screenshots, English and French (welcome, map, search with a result, saved) | Received (2026-11-26) |
+| Plotwatch: 3–4 slides, each a phone screen and a web screen (1280 × 800) of the same moment, English and French (capture, verify, money, overview) | Received (2026-11-26) |
 | CV, English PDF | Waiting (after the developer's edits) |
 | LinkedIn link | Waiting |
 | The email address the site shows | Waiting |
