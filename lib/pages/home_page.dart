@@ -3,6 +3,7 @@ import 'package:jaspr/jaspr.dart';
 
 import '../components/hero.dart';
 import '../components/site_header.dart';
+import '../components/stage/project_stage.dart';
 import '../l10n/strings.dart';
 import '../site.dart';
 
@@ -30,7 +31,10 @@ class HomePage extends StatelessComponent {
         ],
       ),
       SiteHeader(strings: strings),
-      main_([Hero(strings: strings)]),
+      main_([
+        Hero(strings: strings),
+        ProjectStage(languageCode: strings.languageCode),
+      ]),
     ]);
   }
 }

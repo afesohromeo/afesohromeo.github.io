@@ -30,6 +30,24 @@ class EnglishStrings extends Strings {
       'open-source tooling for AI-assisted Flutter development.';
 
   @override
+  String get stageHeading => "What I've built";
+  @override
+  String get projectChoiceLabel => 'Choose a project';
+  @override
+  String get problemLabel => 'Problem';
+  @override
+  String get builtLabel => 'Built';
+  @override
+  String get resultLabel => 'Result';
+  @override
+  String get liveLinkLabel => 'Open the live app';
+  @override
+  String screenAlt(String projectName, Screen screen) => switch (screen) {
+    Screen.web => '$projectName on the web',
+    Screen.phone => '$projectName on a phone',
+  };
+
+  @override
   ProjectText project(ProjectId id) => switch (id) {
     ProjectId.plotwatch => const ProjectText(
       kind: 'Full-stack Dart',
@@ -39,7 +57,7 @@ class EnglishStrings extends Strings {
           'is proven with verified site photos, then approved by the owner.',
       result: 'Live on the web. Built for the Serverpod hackathon from written specs, test-first.',
       slideCaptions: [
-        'On site, the photo is taken in the app. On the web, the owner sees what the stage still needs.',
+        'On site, the photo is taken in the app. On the web, the owner follows every stage.',
         'Each photo passes 8 checks before the owner approves the stage.',
         'Every expense is recorded with its receipt, stage by stage.',
         'The whole project at a glance, with the latest updates.',

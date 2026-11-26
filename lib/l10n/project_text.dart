@@ -15,7 +15,7 @@ class ProjectText {
   final String built;
   final String result;
 
-  /// One per slide, in slide order. Shown under the device, and used as the
-  /// screenshots' alt text for screen readers.
+  /// One per slide, in slide order. Shown under the device as its caption
+  /// (`<figcaption>`), which screen readers also read with the screenshots.
   final List<String> slideCaptions;
 }

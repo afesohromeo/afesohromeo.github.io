@@ -31,6 +31,24 @@ class FrenchStrings extends Strings {
       'assisté par IA.';
 
   @override
+  String get stageHeading => "Ce que j'ai réalisé";
+  @override
+  String get projectChoiceLabel => 'Choisir un projet';
+  @override
+  String get problemLabel => 'Problème';
+  @override
+  String get builtLabel => 'Réalisation';
+  @override
+  String get resultLabel => 'Résultat';
+  @override
+  String get liveLinkLabel => "Ouvrir l'application";
+  @override
+  String screenAlt(String projectName, Screen screen) => switch (screen) {
+    Screen.web => '$projectName sur le web',
+    Screen.phone => '$projectName sur un téléphone',
+  };
+
+  @override
   ProjectText project(ProjectId id) => switch (id) {
     ProjectId.plotwatch => const ProjectText(
       kind: 'Dart full-stack',
@@ -44,7 +62,7 @@ class FrenchStrings extends Strings {
           'de spécifications écrites et de tests.',
       slideCaptions: [
         "Sur le chantier, la photo est prise dans l'application. Sur le web, "
-            "le propriétaire voit ce qu'il manque à l'étape.",
+            'le propriétaire suit chaque étape.',
         "Chaque photo passe 8 contrôles avant que le propriétaire valide l'étape.",
         'Chaque dépense est enregistrée avec son reçu, étape par étape.',
         "Tout le projet en un coup d'œil, avec les dernières mises à jour.",

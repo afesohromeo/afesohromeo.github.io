@@ -18,6 +18,10 @@ abstract class Strings {
   /// Every language the site is built in; English first (the default).
   static const List<Strings> all = [en, fr];
 
+  /// The language with this code. `@client` components receive the code, not
+  /// the [Strings] object, because their parameters must be plain data.
+  static Strings of(String languageCode) => all.firstWhere((strings) => strings.languageCode == languageCode);
+
   /// The `lang` code of the page.
   String get languageCode;
 
@@ -34,6 +38,20 @@ abstract class Strings {
   String get headlineStart;
   String get headlineEnd;
   String get intro;
+
+  // The stage (step 2).
+  String get stageHeading;
+
+  /// Read by screen readers for the row of project buttons.
+  String get projectChoiceLabel;
+
+  String get problemLabel;
+  String get builtLabel;
+  String get resultLabel;
+  String get liveLinkLabel;
+
+  /// The alt text of a screenshot, such as "Plotwatch on a phone".
+  String screenAlt(String projectName, Screen screen);
 
   /// The words about each project on the stage (D-13).
   ProjectText project(ProjectId id);
