@@ -58,13 +58,34 @@ void main() {
         }
       });
 
-      testServer('then the language switch goes to the other language', (tester) async {
+      testServer("then the header offers EN and FR, with this page's language marked", (tester) async {
         final response = await _get(tester, path);
-        final other = strings == Strings.en ? Strings.fr : Strings.en;
 
-        final switchLink = response.document!.querySelector('a[hreflang="${other.languageCode}"]')!;
-        expect(switchLink.attributes['href'], other.homePath);
-        expect(switchLink.text.trim(), strings.otherLanguageName);
+        final links = response.document!.querySelectorAll('.language-switch a');
+        expect(links.map((link) => link.text.trim()), ['EN', 'FR']);
+        expect(links.map((link) => link.attributes['href']), ['/', '/fr/']);
+        expect(links.map((link) => link.attributes['aria-label']), ['English', 'Français']);
+        expect(links.map((link) => link.attributes['aria-current']), [
+          for (final language in Strings.all) language == strings ? 'page' : null,
+        ]);
+      });
+
+      testServer('then the opening links to GitHub, in a new tab', (tester) async {
+        final response = await _get(tester, path);
+
+        final github = response.document!.querySelector('.contact a[href="https://github.com/afesohromeo"]')!;
+        expect(github.text.trim(), startsWith('GitHub'));
+        expect(github.attributes['target'], '_blank');
+        expect(github.attributes['rel'], 'noopener');
+      });
+
+      testServer('then the opening and the stage share one section', (tester) async {
+        final response = await _get(tester, path);
+
+        final intro = response.document!.querySelector('main > section.intro')!;
+        expect(intro.querySelector('h1'), isNotNull);
+        expect(intro.querySelector('.stage .project-button'), isNotNull);
+        expect(intro.querySelector('#stage-heading')!.text.trim(), strings.stageHeading);
       });
     });
   }
